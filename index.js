@@ -8,7 +8,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/cources/:id", (req, res) => {
-  res.send(req.params.id);
+  res.send(`Hello!, ${req.params.id}!`);
+});
+
+app.get("/posts/:year/:month", (req, res) => {
+  res.send(req.query);
 });
 
 app.listen(port, () => {
