@@ -1,19 +1,17 @@
-const { application } = require("express");
 const express = require("express");
-const app = express();
+const app = express(); //エントリーファイルの場合
 const port = process.env.PORT || 3000;
+const bodyParser = require("body-parser");
+const routes = require("./routes/routes");
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
-app.get("/cources/:id", (req, res) => {
-  res.send(`Hello!, ${req.params.id}!`);
-});
-
-app.get("/posts/:year/:month", (req, res) => {
-  res.send(req.query);
-});
+app.use("/courses", routes)
 
 app.listen(port, () => {
   console.log(`ポート番号${port}で立ち上がりました。`);
